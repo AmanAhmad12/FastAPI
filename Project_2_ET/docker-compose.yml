@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:17
+    container_name: postgres_db
+
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: Expense_Tracker_DB
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+        - postgres_data:/var/lib/postgresql
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_A
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+
+volumes:
+  postgres_data:
+  redis-data:
